@@ -4,14 +4,14 @@
 
 
 **Cele 8 obiecte sunt:**
--Client
--Ticket
--Date
--DateTime
--Location
--Event
---OnlineEvent
---PhysicalEvent
+1. Client
+2. Ticket
+3. Date
+4. DateTime
+5.  Location
+6. Event
+7. OnlineEvent
+8. PhysicalEvent
   
 **Interogarile posibile sunt:**
                 - 1) Show Locations
