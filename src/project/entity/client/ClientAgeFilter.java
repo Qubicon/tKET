@@ -1,7 +1,7 @@
-package project.client;
+package project.entity.client;
 
 import project.PlatformService;
-import project.common.*;
+import project.entity.common.*;
 
 import java.util.ArrayList;
 import java.util.List;

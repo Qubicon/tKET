@@ -1,7 +1,7 @@
-package project.client;
+package project.entity.client;
 
-import project.event.Event;
-import project.common.DateTime;
+import project.entity.event.Event;
+import project.entity.common.DateTime;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

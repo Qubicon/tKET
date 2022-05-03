@@ -1,4 +1,4 @@
-package project.client;
+package project.entity.client;
 
 
 import java.util.Comparator;

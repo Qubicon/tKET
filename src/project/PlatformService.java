@@ -1,9 +1,9 @@
 package project;
 
-import project.common.*;
-import project.common.Date;
-import project.event.*;
-import project.client.*;
+import project.entity.common.*;
+import project.entity.common.Date;
+import project.entity.event.*;
+import project.entity.client.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -171,9 +171,6 @@ public class PlatformService {
     public void buyTicket(Client c, Event e, String ticketType){
         Ticket newTicket = new Ticket(ticketType, e, c.getName().charAt(0) + String.valueOf(c.getSurname().charAt(0)));
         c.getTickets().add(newTicket);
-        //ArrayList<Ticket> newTickets = c.getTickets();
-        //newTickets.add(newTicket);
-        //c.setTickets(newTickets);
     }
 
     public double totalMoneySpent(Client c){

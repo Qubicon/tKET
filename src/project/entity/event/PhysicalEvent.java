@@ -1,7 +1,7 @@
-package project.event;
+package project.entity.event;
 
-import project.common.DateTime;
-import project.common.Location;
+import project.entity.common.DateTime;
+import project.entity.common.Location;
 
 import java.util.Objects;
 
