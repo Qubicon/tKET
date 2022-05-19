@@ -1,88 +1,115 @@
 package project;
 
-import project.common.*;
-import project.event.*;
-import project.client.*;
+import project.entity.common.*;
+import project.entity.event.*;
+import project.entity.client.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
+
+import project.ioservice.*;
 
 
 public class Main {
     public static void main(String[] args) {
         PlatformService service = new PlatformService();
+        Logger logger = Logger.getInstance();
 
-        List<Location> locations = new ArrayList<>();
-        List<Client> clients = new ArrayList<>();
-        List<OnlineEvent> onlineEvents = new ArrayList<>();
-        List<PhysicalEvent> physicalEvents = new ArrayList<>();
+        Reader reader = Reader.getInstance();
+        List<Location> locations = reader.readLocationsCSV();
+        List<Client> clients = reader.readClientsCSV();
+        List<OnlineEvent> onlineEvents = reader.readOnlineEventsCSV();
+        List<PhysicalEvent> physicalEvents = reader.readPhysicalEventsCSV();
+
 
         Scanner scanner = new Scanner(System.in);
         showMenu();
         int option = scanner.nextInt();
-        while (true){
+        while (true) {
 
             switch (option) {
-                case 0:
+                case 0 -> {
+                    Writer writer = Writer.getInstance();
+                    writer.writeLocationsCSV(locations);
+                    writer.writeClientsCSV(clients);
+                    writer.writeOnlineEventsCSV(onlineEvents);
+                    writer.writePhysicalEventsCSV(physicalEvents);
+                    logger.close();
                     return;
-                case 1:
+                }
+                case 1 -> {
                     service.display(locations);
-                    break;
-                case 2:
+                    logger.write("Show locations");
+                }
+                case 2 -> {
                     service.display(clients);
-                    break;
-                case 3:
+                    logger.write("Show clients");
+                }
+                case 3 -> {
                     service.display(onlineEvents);
-                    break;
-                case 4:
+                    logger.write("Show Online Events");
+                }
+                case 4 -> {
                     service.display(physicalEvents);
-                    break;
-                case 5:
+                    logger.write("Show Physical Events");
+                }
+                case 5 -> {
                     locations.add(service.generateLocation());
-                    break;
-                case 6:
+                    logger.write("Add location");
+                }
+                case 6 -> {
                     clients.add(service.generatePerson());
-                    break;
-                case 7:
+                    logger.write("Add client");
+                }
+                case 7 -> {
                     onlineEvents.add((OnlineEvent) service.generateEvent(true));
-                    break;
-                case 8:
+                    logger.write("Add Online Event");
+                }
+                case 8 -> {
                     physicalEvents.add((PhysicalEvent) service.generateEvent(false));
-                    break;
-                case 9:
+                    logger.write("Add Physical Event");
+                }
+                case 9 -> {
                     service.display(service.filter(new ClientAgeFilter(), clients, 18L));
-                    break;
-                case 10:
+                    logger.write("Show overage clients");
+                }
+                case 10 -> {
                     System.out.println("Enter event type (concert, movie, sport, fashion, theatre, gaming, art)");
                     String type = scanner.next();
                     service.display(service.filter(new EventTypeFilter(), service.combineEvents(onlineEvents, physicalEvents), type));
-                    break;
-                case 11:
+                    logger.write("Filter events by type");
+                }
+                case 11 -> {
                     service.listClients(clients);
                     System.out.println("Select client index:");
                     int index = scanner.nextInt();
                     System.out.println(service.age(clients.get(index)));
-                    break;
-                case 12:
+                    logger.write("Show age of client");
+                }
+                case 12 -> {
                     service.listClients(clients);
                     System.out.println("Select client index:");
                     int ind = scanner.nextInt();
                     System.out.println(service.totalMoneySpent(clients.get(ind)));
-                    break;
-                case 13:
+                    logger.write("Calculate total amount of money spent by client");
+                }
+                case 13 -> {
                     service.sortClientsAge(clients);
                     service.display(clients);
-                    break;
-                case 14:
+                    logger.write("Sort clients by age descending");
+                }
+                case 14 -> {
                     service.sortClientsNrTickets(clients);
                     service.display(clients);
-                    break;
-                case 15:
+                    logger.write("Sort clients by number of tickets bought descending");
+                }
+                case 15 -> {
                     service.sortClientsNrTicketsAge(clients);
                     service.display(clients);
-                    break;
-                case 16:
+                    logger.write("Sort clients by number of tickets descending and by age descending");
+                }
+                case 16 -> {
                     service.listClients(clients);
                     System.out.println("Select client index:");
                     int clientIndex = scanner.nextInt();
@@ -90,38 +117,42 @@ public class Main {
                     System.out.println("Select ticket type (GENERAL, EARLY, VIP):");
                     String ticketType = scanner.next();
                     service.buyTicket(clients.get(clientIndex), event, ticketType);
-                    break;
-                case 17:
+                    logger.write("Buy ticket selecting client and event");
+                }
+                case 17 -> {
                     Event chosenEvent = service.chooseEvent(onlineEvents, physicalEvents);
                     System.out.println(service.remainingDays(chosenEvent));
-                    break;
-                case 18:
+                    logger.write("Days left until event");
+                }
+                case 18 -> {
                     service.listLocations(locations);
                     System.out.println("Select location index:");
                     int locationIndex = scanner.nextInt();
                     service.remove(locations, locationIndex);
-                    break;
-                case 19:
+                    logger.write("Remove location");
+                }
+                case 19 -> {
                     service.listClients(clients);
                     System.out.println("Select client index:");
                     int clIndex = scanner.nextInt();
                     service.remove(clients, clIndex);
-                    break;
-                case 20:
+                    logger.write("Remove client");
+                }
+                case 20 -> {
                     service.listOnlineEvents(onlineEvents);
                     System.out.println("Select event index:");
                     int oeIndex = scanner.nextInt();
                     service.remove(onlineEvents, oeIndex);
-                    break;
-                case 21:
+                    logger.write("Remove Online Event");
+                }
+                case 21 -> {
                     service.listPhysicalEvents(physicalEvents);
                     System.out.println("Select event index:");
                     int peIndex = scanner.nextInt();
                     service.remove(physicalEvents, peIndex);
-                    break;
-                default:
-                    System.out.println("Incorrect option! Number must be between 0 and 21");
-
+                    logger.write("Remove Physical Event");
+                }
+                default -> System.out.println("Incorrect option! Number must be between 0 and 21");
             }
 
             showMenu();
@@ -131,7 +162,7 @@ public class Main {
 
     }
 
-    private static void showMenu(){
+    private static void showMenu() {
         System.out.println("""
                 Menu:
                 0) Exit

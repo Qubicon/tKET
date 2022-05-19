@@ -1,4 +1,4 @@
-package project.common;
+package project.entity.common;
 
 public class Date {
 

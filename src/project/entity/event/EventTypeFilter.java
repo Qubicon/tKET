@@ -1,8 +1,6 @@
-package project.event;
+package project.entity.event;
 
-import project.PlatformService;
-import project.client.Client;
-import project.common.Filterable;
+import project.entity.common.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;

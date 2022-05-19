@@ -1,6 +1,6 @@
-package project.event;
+package project.entity.event;
 
-import project.common.*;
+import project.entity.common.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

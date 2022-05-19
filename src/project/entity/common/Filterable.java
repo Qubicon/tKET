@@ -1,5 +1,4 @@
-package project.common;
-import project.event.Event;
+package project.entity.common;
 
 import java.util.List;
 

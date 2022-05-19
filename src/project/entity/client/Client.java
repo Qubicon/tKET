@@ -1,6 +1,6 @@
-package project.client;
+package project.entity.client;
 
-import project.common.*;
+import project.entity.common.*;
 
 import java.util.Objects;
 import java.util.Set;

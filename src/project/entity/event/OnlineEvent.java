@@ -1,6 +1,6 @@
-package project.event;
+package project.entity.event;
 
-import project.common.DateTime;
+import project.entity.common.DateTime;
 
 import java.util.Objects;
 
