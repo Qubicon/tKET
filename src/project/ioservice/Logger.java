@@ -10,7 +10,7 @@ public class Logger {
 
     private Logger() {
         try {
-            loggerWriter = new FileWriter("audit.csv");
+            loggerWriter = new FileWriter("audit.csv", true);
         } catch (IOException e) {
             e.printStackTrace();
         }
